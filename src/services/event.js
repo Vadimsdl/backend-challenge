@@ -64,7 +64,7 @@ async function updateEvent(req, res) {
     if (!update.modifiedCount)
       return res.status(404).send({message: 'item have this value'});
     
-    res.status(201).send({message: 'item update'});
+    res.status(200).send({message: 'item update'});
   } catch (e) {
     res.status(500).send({message: `Something wrong --> ${e.message}`});
   }

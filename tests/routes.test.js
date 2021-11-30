@@ -78,7 +78,7 @@ describe('POST: sign up user', () => {
 //===================================================
 
 describe('POST: sign in user', () => {
-  it('POST: Sign In (User was able to log in) > respons 201', async () => {
+  it('POST: Sign In (User was able to log in) > respons 200', async () => {
     const res = await request(app)
       .post('/api/signin')
       .field('email', 'jon@doew.test')
@@ -111,12 +111,12 @@ describe('POST: create event', () => {
       .post('/api/signin')
       .field('email', 'jon@doew.test')
       .field('password', 'IamTester1337!!')
-      .expect(201);
+      .expect(200);
       
       cookie = res.headers['set-cookie'][0];
   });
 
-  it('POST: (User create event) > response 201', async () => {
+  it('POST: (User create event) > response 200', async () => {
       const res = await agent
         .post('/api/event/create')
         .set('Cookie', cookie)
@@ -144,20 +144,20 @@ describe('POST: registration and unregistration for the event', () => {
       .post('/api/signin')
       .field('email', 'jane@doew.test')
       .field('password', 'IamTester1337!!')
-      .expect(201);
+      .expect(200);
       
       cookie = res.headers['set-cookie'][0];
   });
 
-  it('POST: (User registers for the event) > response 201', async () => {
+  it('POST: (User registers for the event) > response 200', async () => {
       const res = await agent
         .post(`/api/user/event/register/${EVENT_ID}`)
         .set('Cookie', cookie);
-      expect(res.statusCode).toEqual(201);
+      expect(res.statusCode).toEqual(200);
       expect(res.body).toHaveProperty('message', 'register user on event');
   });
 
-  it('POST: (User unregisters for the event) > response 201', async () => {
+  it('POST: (User unregisters for the event) > response 200', async () => {
     const res = await agent
       .post(`/api/user/event/unregister/${EVENT_ID}`)
       .set('Cookie', cookie);
@@ -179,24 +179,24 @@ describe('GET, PUT, DELETE: work with events', () => {
       .post('/api/signin')
       .field('email', 'jon@doew.test')
       .field('password', 'IamTester1337!!')
-      .expect(201);
+      .expect(200);
       
       cookie = res.headers['set-cookie'][0];
   });
 
-  it('GET: (User get info about event) > response 201', async () => {
+  it('GET: (User get info about event) > response 200', async () => {
       const res = await agent
         .get(`/api/event/${EVENT_ID}`)
         .set('Cookie', cookie);
       expect(res.statusCode).toEqual(200);
   });
 
-  it('PUT: (User update info about event) > response 201', async () => {
+  it('PUT: (User update info about event) > response 200', async () => {
     const res = await agent
       .put(`/api/event/update/${EVENT_ID}`)
       .field('name', 'New Test Name')
       .field('location', 'New Location');
-    expect(res.statusCode).toEqual(201);
+    expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('message', 'item update');
   });
 
@@ -209,7 +209,7 @@ describe('GET, PUT, DELETE: work with events', () => {
     expect(res.body).toHaveProperty('message', 'item have this value');
   });
 
-  it('DELETE: (User remove event) > response 201', async () => {
+  it('DELETE: (User remove event) > response 200', async () => {
     const res = await agent
       .delete(`/api/event/delete/${EVENT_ID}`);
     expect(res.statusCode).toEqual(200);

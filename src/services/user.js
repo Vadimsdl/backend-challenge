@@ -77,9 +77,9 @@ async function registerEvent(req, res) {
       return res.status(404).send({message: 'haven\'t this event'});
 
     if (!update.modifiedCount) 
-     return res.status(201).send({message: 'user was registered'});
+     return res.status(200).send({message: 'user was registered'});
     
-    res.status(201).send({message: 'register user on event'});
+    res.status(200).send({message: 'register user on event'});
   } catch (e) {
     res.status(500).send({message: `Something wrong --> ${e.message}`});
   }
@@ -110,7 +110,7 @@ async function unregisterEvent(req, res) {
         return res.status(404).send({message: 'haven\'t this event'});
       
       if (!update.modifiedCount) 
-        return res.status(201).send({message: 'user was unregistered'});
+        return res.status(200).send({message: 'user was unregistered'});
     }
     res.status(200).send({message: 'unregister user on event'});
   } catch (e) {
