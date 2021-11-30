@@ -30,7 +30,7 @@ async function createEvent(req, res) {
 async function detailEvent(req, res) {
   try {
     const { params } = req;
-    const result = await Event.findOne({_id: params._id});
+    const result = await Event.findOne({_id: params._id}).lean();
     res.status(200).send(result);
   } catch (e) {
     res.status(500).send({message: `Something wrong --> ${e.message}`});

@@ -10,7 +10,7 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(_id, done) {
   User.findById(_id, function(err, user) {
     done(err, user);
-  });
+  }).lean();
 });
 
 passport.use(new LocalStrategy({usernameField: 'email'},
@@ -24,6 +24,6 @@ passport.use(new LocalStrategy({usernameField: 'email'},
         return done(null, false, { message: 'Incorrect password.' });
       } 
       return done(null, user);
-    });
+    }).lean();
   }
 ));
